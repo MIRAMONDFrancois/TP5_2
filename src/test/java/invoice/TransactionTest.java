@@ -78,9 +78,9 @@ public class TransactionTest {
 		float before = myDAO.totalForCustomer(id);
 		System.out.printf("Before: %f %n", before);
 
-		// Un tableau de 3 productID
+		// Un tableau de 1 productID
 		int[] productIds = new int[]{0}; // Le produit 0 vaut 10 €
-		// Un tableau de 3 quantites
+		// Un tableau de 1 quantites
 		int[] quantities = new int[]{2};
 		// On exécute la transaction
 		myDAO.createInvoice(myCustomer, productIds, quantities);
