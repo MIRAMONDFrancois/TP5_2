@@ -87,7 +87,7 @@ public class DAO {
 			invoiceStatement.setInt(1, customer.getCustomerId());
 			invoiceStatement.executeUpdate();
 
-			// On a bien créé la facture, cherchons son ID	
+			// On a bien créé la facture, cherchons son ID	(autogénéré)
 			ResultSet generatedKeys = invoiceStatement.getGeneratedKeys();
 			generatedKeys.next();
 			int invoiceID = generatedKeys.getInt("ID");
