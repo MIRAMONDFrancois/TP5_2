@@ -50,7 +50,8 @@ public class TransactionTest {
 	}
 	
 	@After
-	public void tearDown() {
+	public void tearDown() throws SQLException {
+                myConnection.close();
 		myDAO = null; // Pas vraiment utile
 	}
 	
