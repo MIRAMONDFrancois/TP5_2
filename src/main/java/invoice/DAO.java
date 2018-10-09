@@ -78,35 +78,7 @@ public class DAO {
 	 */
 	public void createInvoice(CustomerEntity customer, int[] productIDs, int[] quantities)
 		throws Exception {
-		String insertInvoice = "INSERT INTO Invoice(CustomerID) VALUES (?)";
-		//---------------------------------------------------InvoiceID, Item, ProductID, Quantity, Cost
-		String insertItem = "INSERT INTO Item VALUES(?, ?, ?, ?, (SELECT Price FROM product WHERE Product.ID = ?) )";
-
-		try (Connection myConnection = myDataSource.getConnection();
-			PreparedStatement invoiceStatement = myConnection.prepareStatement(insertInvoice, Statement.RETURN_GENERATED_KEYS)) {
-			invoiceStatement.setInt(1, customer.getCustomerId());
-			invoiceStatement.executeUpdate();
-
-			// On a bien créé la facture, cherchons son ID	(autogénéré)
-			ResultSet generatedKeys = invoiceStatement.getGeneratedKeys();
-			generatedKeys.next();
-			int invoiceID = generatedKeys.getInt("ID");
-			System.out.printf("InvoiceID %d %n", invoiceID);
-
-			// Créer les Item
-			try (PreparedStatement itemStatement = myConnection.prepareStatement(insertItem)) {
-				for (int item = 0; item < productIDs.length; item++) {
-					itemStatement.clearParameters();
-					itemStatement.setInt(1, invoiceID);
-					itemStatement.setInt(2, item);
-					itemStatement.setInt(3, productIDs[item]);
-					itemStatement.setInt(4, quantities[item]);
-					itemStatement.setInt(5, productIDs[item]);
-					int n = itemStatement.executeUpdate();
-					System.out.printf("%d item inserted %n", n);
-				}
-			}
-		}
+		throw new UnsupportedOperationException("Pas encore implémenté");
 	}
 
 	/**
