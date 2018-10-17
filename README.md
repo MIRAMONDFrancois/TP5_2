@@ -6,7 +6,23 @@ La table Invoice a une clé auto-générée (cf. le [schéma de la base](`src/te
 
 On aura besoin de cette clé auto-générée pour créer les enregistrements dans Item (clé étrangère).
 
-Pour traiter les clé auto-générées avec JDBC, voir [cet exemple](`https://java.developpez.com/faq/jdbc/?page=Les-instructions-moins-Statement-Generalites#Comment-recuperer-les-clefs-autogenerees-par-l-execution-du-Statement`)
+Pour traiter les clé auto-générées avec JDBC, voir cet exemple :
+
+```java
+String commandeSQL = " ..."; 
+PreparedStatement statement = connection.prepareStatement( commandeSQL, Statement.RETURN_GENERATED_KEYS) ; 
+// Définir les paramètres éventuels de la requête
+// ...
+
+statement.executeUpdate(); 
+// Les clefs autogénérées sont retournées sous forme de ResultSet, 
+// il se peut qu'une requête génère plusieurs clés
+ResultSet clefs = statement.getGeneratedKeys(); 
+clefs.next(); // On lit la première clé générée
+System.out.printn("La première clef autogénérée vaut " + clefs.getInt(1));   
+
+
+```
 
 ## Dépendances
 
